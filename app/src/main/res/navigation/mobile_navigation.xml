@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/transport">
+
+    <fragment
+        android:id="@+id/transport"
+        android:name="checkman.ui.transport.TransportFragment"
+        android:label="@string/menu_transport"
+        tools:layout="@layout/fragment_home" />
+</navigation>
