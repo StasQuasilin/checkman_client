@@ -1,11 +1,20 @@
 package checkman.constants;
 
 public interface Links {
-    String HOME = "/checkman";
-    String EXTERNAL = "ws://91.222.16.30" + HOME;
-    String INTERNAL = "ws://10.10.10.201:3322" + HOME;
     String API = "/api/v1";
+    String EXTERNAL = "91.222.16.30:3322/checkman";
+    String INTERNAL = "10.10.10.201:3322/checkman";
+    String HTTP_PROTOCOL = "http://";
+    String SOCKET_PROTOCOL = "ws://";
     String SUBSCRIBE = "/api/subscriber";
-    String EXTERNAL_SUBSCRIBE = EXTERNAL + SUBSCRIBE;
-    String INTERNAL_SUBSCRIBE = INTERNAL + SUBSCRIBE;
+
+    String EXTERNAL_API = HTTP_PROTOCOL + EXTERNAL;
+    String INTERNAL_API = HTTP_PROTOCOL + INTERNAL;
+    String EXTERNAL_SUBSCRIBE = SOCKET_PROTOCOL + EXTERNAL + SUBSCRIBE;
+    String INTERNAL_SUBSCRIBE = SOCKET_PROTOCOL + INTERNAL + SUBSCRIBE;;
+
+    String HOME = "/checkman";
+    String LOGIN = "/a/sign/in";
+
+
 }

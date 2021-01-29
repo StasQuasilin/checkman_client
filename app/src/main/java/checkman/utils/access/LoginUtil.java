@@ -7,6 +7,8 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 import checkman.activity.LoginActivity;
+import checkman.constants.Keys;
+import checkman.constants.Links;
 import checkman.entity.UserAccess;
 import checkman.utils.connection.AnswerListener;
 import checkman.utils.connection.Connector;
@@ -42,23 +44,20 @@ public class LoginUtil {
   
   public void login(String paramString1, final String hash, final OnLogin onSuccess, final OnLogin onError) {
     HashMap<Object, Object> hashMap = new HashMap<>();
-    hashMap.put("uid", paramString1);
-    hashMap.put("hash", hash);
-    this.connector.sendMsg(this.context, "/a/sign/in", new JSONObject(hashMap), new AnswerListener() {
+    hashMap.put(Keys.UID, paramString1);
+    hashMap.put(Keys.HASH, hash);
+    this.connector.sendMsg(this.context, Links.LOGIN, new JSONObject(hashMap), new AnswerListener() {
       public void onError(VolleyError param1VolleyError) {
         param1VolleyError.printStackTrace();
       }
-      public void onSuccess(JSONObject param1JSONObject) {
-        System.out.println(param1JSONObject);
+      public void onSuccess(JSONObject jsonObject) {
+        System.out.println(jsonObject);
         try {
-          String str;
-          if (param1JSONObject.getString("status").equals("success")) {
-            str = param1JSONObject.getString("uid");
-            LoginUtil.this.userAccessUtil.saveUserData(str, hash);
+          if (jsonObject.getString(Keys.STATUS).equals(Keys.SUCCESS)) {
+            userAccessUtil.saveUserData(jsonObject.getString(Keys.UID), hash);
             onSuccess.handle(null);
           } else {
-            str = param1JSONObject.getString("msd");
-            onError.handle(str);
+            onError.handle(jsonObject.getString("msd"));
           }
         } catch (JSONException jSONException) {
           jSONException.printStackTrace();
